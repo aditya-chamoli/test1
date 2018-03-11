@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-<context:component-scan base-package="com.olr.controller"/>
+<context:component-scan base-package="com.olr.controller,com.olr.service"/>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -33,6 +33,10 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.olr.model.Question</value>
+				<value>com.olr.model.Answer</value>
+				<value>com.olr.model.EntityBasic</value>
+				<value>com.olr.model.EntityProperty</value>
+				<value>com.olr.model.EntityDependency</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -45,6 +49,14 @@
 	</bean>
 	
 	<bean id="questionDao" class="com.olr.dao.QuestionDao">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	
+	<bean id="answerDao" class="com.olr.dao.AnswerDao">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
+	
+	<bean id="entityDao" class="com.olr.dao.EntityDao">
 		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
 	</bean>
 	
